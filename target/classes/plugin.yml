@@ -1,0 +1,50 @@
+name: "intersurvie"
+version: 1.1.5
+main: pocoyo.intersurvie.PluginMain
+author: pocoyo
+api-version: 1.16
+description: "Allows users to claim land easily!"
+commands:
+   claim:
+      description: "Allows you to claim land!"
+      permission: intersurvie.claims.claimChunk
+      permission-message: "perm : intersurvie.player.claim"
+   unclaim:
+      description: "Allows you to unclaim land"
+      permission: intersurvie.claims.unclaimChunk
+      permission-message: "perm : intersurvie.player.unclaim" 
+   rtp:
+      description: "teleports randomly"
+      permission: intersurvie.player.rtp
+      permission-message: "perm : intersurvie.player.rtp"
+   debug-claim:
+      description: "debug claim"
+      permission: intersurvie.debug.claim
+      permission-message: "perm : intersurvie.debug.claim"
+permissions:
+   intersurvie.claims.*:
+      description: Gives access to all Claim permissions
+      children:
+         intersurvie.claims.claimChunk: true
+         intersurvie.claims.unclaimChunk: true
+         intersurvie.claims.unclaimChunkAdmin: true
+         intersurvie.claims.bypassProtection: true
+   intersurvie.claims.claimChunk:
+      description: Allows you to Claim a chunk of land
+      default: true
+   intersurvie.claims.unclaimChunk:
+      description: Allows you to Unclaim a chunk of land that is yours
+      default: true
+   intersurvie.claims.unclaimChunkAdmin:
+      description: Allows you to Unclaim a chunk that isnt yours
+      default: op
+   intersurvie.claims.bypassProtection:
+      description: Allows you to bypass the protection
+      default: op
+   intersurvie.rtp:
+      description: Allows you to randomly teleport
+      default: true
+   intersurvie.misc.cooldownBypass:
+      description: Allows you to bypass cooldown
+      default: op
+

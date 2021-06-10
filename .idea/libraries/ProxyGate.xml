@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="ProxyGate">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/lib/proxygate/ProxyGate.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
