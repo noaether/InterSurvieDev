@@ -1,4 +1,4 @@
-package pocoyo.intersurvie;
+/* package pocoyo.intersurvie;
 
 import com.sun.tools.javac.jvm.Items;
 import org.bukkit.Material;
@@ -152,3 +152,4 @@ public class CustomInventory extends PluginMain implements Listener {
     }
 
 }
+*/

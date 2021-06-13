@@ -158,7 +158,6 @@ public class EventListener implements Listener {
 
     @EventHandler
     public void InvenClick(InventoryClickEvent event) {
-        event.setCancelled(true);
         Player player = (Player) event.getWhoClicked();
 
         String chunkCoordsX = String.valueOf(player.getLocation().getChunk().getX());
@@ -171,23 +170,16 @@ public class EventListener implements Listener {
             return;
         }
         if (
-                        open.getSize() == 26 && // Checks for correct size
-                        open.getLocation() == null // Checks if inv is plugin-summoned
-
+            open.getLocation() == null // Checks if inv is plugin-summoned
+                &&
+            open.getSize() == 27
         ) {
-
             event.setCancelled(true);
 
             ItemStack empty = new ItemStack(Material.GRAY_STAINED_GLASS_PANE, 1);
             ItemMeta emptyMeta = empty.getItemMeta();
             emptyMeta.setDisplayName("");
             empty.setItemMeta(emptyMeta);
-
-
-            if (item == null || !item.hasItemMeta() || item == empty) {
-                event.setCancelled(true);
-            }
-
 
             if (item.getItemMeta().getDisplayName().equals(ChatColor.GREEN + "CAN INTERACT WITH REDSTONE : ON")) {
                 ItemStack redstoneOFF = new ItemStack(Material.RED_TERRACOTTA, 1);
