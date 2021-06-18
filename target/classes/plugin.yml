@@ -6,16 +6,28 @@ api-version: 1.16
 description: "Allows users to claim land easily!"
 commands:
    claim:
-      description: "Allows you to claim land!"
+      description: "Claim land"
       permission: intersurvie.claims.claimChunk
-      permission-message: "perm : intersurvie.player.claim"
+      permission-message: "perm : intersurvie.claims.claimChunk"
+   trust:
+      description: "Give someone all permissions on a chunk"
+      permission: intersurvie.claims.trustPlayer
+      permission-message: "perm : intersurvie.claims.trustPlayer"
+   untrust:
+      description: "Remove someone's permissions"
+      permission: intersurvie.claims.untrustPlayer
+      permission-message: "perm : intersurvie.claims.untrustPlayer"
    unclaim:
-      description: "Allows you to unclaim land"
+      description: "Unclaim a chunk of land"
       permission: intersurvie.claims.unclaimChunk
-      permission-message: "perm : intersurvie.player.unclaim" 
+      permission-message: "perm : intersurvie.claims.unclaimChunk"
+   editChunk:
+      description: "Edit the settings of a chunk"
+      permission: intersurvie.claims.editChunk
+      permission-message: "perm : intersurvie.claims.editChunk"
    rtp:
-      description: "teleports randomly"
-      permission: intersurvie.player.rtp
+      description: "Teleports randomly"
+      permission: intersurvie.rtp
       permission-message: "perm : intersurvie.player.rtp"
    debug-claim:
       description: "debug claim"
@@ -29,11 +41,15 @@ permissions:
          intersurvie.claims.unclaimChunk: true
          intersurvie.claims.unclaimChunkAdmin: true
          intersurvie.claims.bypassProtection: true
+         intersurvie.claims.trustPlayer: true
    intersurvie.claims.claimChunk:
       description: Allows you to Claim a chunk of land
       default: true
    intersurvie.claims.unclaimChunk:
       description: Allows you to Unclaim a chunk of land that is yours
+      default: true
+   intersurvie.claims.editChunk:
+      description: Allows you to edit a chunk of land that is yours
       default: true
    intersurvie.claims.unclaimChunkAdmin:
       description: Allows you to Unclaim a chunk that isnt yours
@@ -41,6 +57,12 @@ permissions:
    intersurvie.claims.bypassProtection:
       description: Allows you to bypass the protection
       default: op
+   intersurvie.claims.trustPlayer:
+      description: Allows you to trust someone on your chunk
+      default: true
+   intersurvie.claims.untrustPlayer:
+      description: Allows you to untrust someone from your chunk
+      default: true
    intersurvie.rtp:
       description: Allows you to randomly teleport
       default: true

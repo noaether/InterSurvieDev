@@ -23,4 +23,8 @@ unclaim-notclaimed : "unclaim-notclaimed" # (STRING) | Chunk isnt claimed, and c
 claim-chunk : "claim-chunk" # (String) | Player claimed a chunk
 claim-notavailable : "claim-notavailable" # (STRING) | Chunk is already claimed
 
+claim-notowner : "claim-notowner"
+claim-trustAdded : "claim-trustAdded" # (STRING) | Player added a player to the chunk | $PLAYER$ Name of the added player
+claim-untrustRemoved : "claim-untrustRemoved" # (STRING) | Player removed a player from the chunk | $PLAYER$ Name of the added player
+claim-neverJoined : "claim-neverJoined" # (STRING) | Player has never joined and cannot be added | $PLAYER$ Name of the added player
 claim-chunkclaimed : "claim-chunkclaimed" # (STRING) | Chunk is claimed, no interaction permitted

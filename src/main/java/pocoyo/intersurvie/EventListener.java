@@ -178,10 +178,45 @@ public class EventListener implements Listener {
 
             ItemStack empty = new ItemStack(Material.GRAY_STAINED_GLASS_PANE, 1);
             ItemMeta emptyMeta = empty.getItemMeta();
-            emptyMeta.setDisplayName("");
+            emptyMeta.setDisplayName(" ");
             empty.setItemMeta(emptyMeta);
 
-            if (item.getItemMeta().getDisplayName().equals(ChatColor.GREEN + "CAN INTERACT WITH REDSTONE : ON")) {
+            ItemStack activated = new ItemStack(Material.LIME_STAINED_GLASS_PANE, 1 );
+            ItemMeta activatedMeta = activated.getItemMeta();
+            activatedMeta.setDisplayName(" ");
+            activated.setItemMeta(activatedMeta);
+
+            ItemStack disabled = new ItemStack(Material.RED_STAINED_GLASS_PANE, 1);
+            ItemMeta disabledMeta = disabled.getItemMeta();
+            disabledMeta.setDisplayName(" ");
+            disabled.setItemMeta(disabledMeta);
+
+            ItemStack redstoneSettings = new ItemStack(Material.REDSTONE, 1);
+            ItemMeta rONmeta = redstoneSettings.getItemMeta();
+            rONmeta.setDisplayName(ChatColor.RED + "REDSTONE SETTINGS");
+            redstoneSettings.setItemMeta(rONmeta);
+
+            ItemStack friendlyON = new ItemStack(Material.IRON_SWORD, 1);
+            ItemMeta fONmeta = friendlyON.getItemMeta();
+            fONmeta.setDisplayName(ChatColor.GREEN + "CAN HIT FRIENDLY ANIMALS : ON");
+            friendlyON.setItemMeta(fONmeta);
+
+            ItemStack friendlyOFF = new ItemStack(Material.IRON_SWORD, 1);
+            ItemMeta fOFFmeta = friendlyOFF.getItemMeta();
+            fOFFmeta.setDisplayName(ChatColor.RED + "CAN HIT FRIENDLY ANIMALS : OFF");
+            friendlyOFF.setItemMeta(fOFFmeta);
+
+            ItemStack chestOFF = new ItemStack(Material.CHEST,1);
+            ItemMeta cOFFmeta = chestOFF.getItemMeta();
+            cOFFmeta.setDisplayName(ChatColor.RED + "CAN OPEN CHESTS : OFF");
+            chestOFF.setItemMeta(cOFFmeta);
+
+            ItemStack chestON = new ItemStack(Material.CHEST,1);
+            ItemMeta cONmeta = chestON.getItemMeta();
+            cONmeta.setDisplayName(ChatColor.GREEN + "CAN OPEN CHESTS : ON");
+            chestON.setItemMeta(cONmeta);
+
+            if (item.getItemMeta().getDisplayName().equals(ChatColor.GREEN + "CAN HIT FRIENDLY ANIMALS : ON")) {
                 ItemStack redstoneOFF = new ItemStack(Material.RED_TERRACOTTA, 1);
                 ItemMeta rOFFmeta = redstoneOFF.getItemMeta();
                 rOFFmeta.setDisplayName(ChatColor.RED + "CAN INTERACT WITH REDSTONE : OFF");
@@ -190,36 +225,42 @@ public class EventListener implements Listener {
                 PluginMain.getInstance().getConfig().set("intersurvie.claims.chunk.perms.redstone." + chunkCoordsX + chunkCoordsZ, "false");
 
                 open.setItem(3, redstoneOFF);
-            } else
-            if (item.getItemMeta().getDisplayName().equals(ChatColor.RED + "CAN INTERACT WITH REDSTONE : OFF")) {
-                ItemStack redstoneON = new ItemStack(Material.LIME_TERRACOTTA, 1);
-                ItemMeta rONmeta = redstoneON.getItemMeta();
-                rONmeta.setDisplayName(ChatColor.GREEN + "CAN INTERACT WITH REDSTONE : ON");
-                redstoneON.setItemMeta(rONmeta);
+            } else if (item.getItemMeta().getDisplayName().equals(ChatColor.GREEN + "CAN HIT FRIENDLY ANIMALS : ON")) {
+                ItemStack redstoneOFF = new ItemStack(Material.RED_TERRACOTTA, 1);
+                ItemMeta rOFFmeta = redstoneOFF.getItemMeta();
+                rOFFmeta.setDisplayName(ChatColor.RED + "CAN INTERACT WITH REDSTONE : OFF");
+                redstoneOFF.setItemMeta(rOFFmeta);
 
-                PluginMain.getInstance().getConfig().set("intersurvie.claims.chunk.perms.redstone." + chunkCoordsX + chunkCoordsZ, "true");
+                PluginMain.getInstance().getConfig().set("intersurvie.claims.chunk.perms.redstone." + chunkCoordsX + chunkCoordsZ, "false");
 
-                open.setItem(3, redstoneON);
-            } else
-            if (item.getItemMeta().getDisplayName().equals(ChatColor.GREEN + "CAN HIT FRIENDLY ANIMALS : ON")) {
-                ItemStack friendlyOFF = new ItemStack(Material.RED_TERRACOTTA, 1);
-                ItemMeta fOFFmeta = friendlyOFF.getItemMeta();
-                fOFFmeta.setDisplayName(ChatColor.RED + "CAN HIT FRIENDLY ANIMALS : OFF");
-                friendlyOFF.setItemMeta(fOFFmeta);
+                open.setItem(3, redstoneOFF);
+            } else if (item.getItemMeta().getDisplayName().equals(ChatColor.GREEN + "CAN HIT FRIENDLY ANIMALS : ON")) {
+                ItemStack redstoneOFF = new ItemStack(Material.RED_TERRACOTTA, 1);
+                ItemMeta rOFFmeta = redstoneOFF.getItemMeta();
+                rOFFmeta.setDisplayName(ChatColor.RED + "CAN INTERACT WITH REDSTONE : OFF");
+                redstoneOFF.setItemMeta(rOFFmeta);
 
-                PluginMain.getInstance().getConfig().set("intersurvie.claims.chunk.perms.friendlymobs." + chunkCoordsX + chunkCoordsZ, "false");
+                PluginMain.getInstance().getConfig().set("intersurvie.claims.chunk.perms.redstone." + chunkCoordsX + chunkCoordsZ, "false");
 
-                open.setItem(5, friendlyOFF);
-            } else
-            if (item.getItemMeta().getDisplayName().equals(ChatColor.RED + "CAN HIT FRIENDLY ANIMALS : OFF")) {
-                ItemStack friendlyON = new ItemStack(Material.LIME_TERRACOTTA, 1);
-                ItemMeta fONmeta = friendlyON.getItemMeta();
-                fONmeta.setDisplayName(ChatColor.GREEN + "CAN HIT FRIENDLY ANIMALS : ON");
-                friendlyON.setItemMeta(fONmeta);
+                open.setItem(3, redstoneOFF);
+            } else if (item.getItemMeta().getDisplayName().equals(ChatColor.GREEN + "CAN HIT FRIENDLY ANIMALS : ON")) {
+                ItemStack redstoneOFF = new ItemStack(Material.RED_TERRACOTTA, 1);
+                ItemMeta rOFFmeta = redstoneOFF.getItemMeta();
+                rOFFmeta.setDisplayName(ChatColor.RED + "CAN INTERACT WITH REDSTONE : OFF");
+                redstoneOFF.setItemMeta(rOFFmeta);
 
-                PluginMain.getInstance().getConfig().set("intersurvie.claims.chunk.perms.friendlymobs." + chunkCoordsX + chunkCoordsZ, "false");
+                PluginMain.getInstance().getConfig().set("intersurvie.claims.chunk.perms.redstone." + chunkCoordsX + chunkCoordsZ, "false");
 
-                open.setItem(5, friendlyON);
+                open.setItem(3, redstoneOFF);
+            } else if (item.getItemMeta().getDisplayName().equals(ChatColor.GREEN + "CAN HIT FRIENDLY ANIMALS : ON")) {
+                ItemStack redstoneOFF = new ItemStack(Material.RED_TERRACOTTA, 1);
+                ItemMeta rOFFmeta = redstoneOFF.getItemMeta();
+                rOFFmeta.setDisplayName(ChatColor.RED + "CAN INTERACT WITH REDSTONE : OFF");
+                redstoneOFF.setItemMeta(rOFFmeta);
+
+                PluginMain.getInstance().getConfig().set("intersurvie.claims.chunk.perms.redstone." + chunkCoordsX + chunkCoordsZ, "false");
+
+                open.setItem(3, redstoneOFF);
             }
         }
     }
