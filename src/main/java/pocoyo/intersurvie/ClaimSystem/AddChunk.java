@@ -1,9 +1,8 @@
 package pocoyo.intersurvie.ClaimSystem;
 
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import pocoyo.intersurvie.PluginMain;
@@ -27,27 +26,20 @@ public class AddChunk implements CommandExecutor {
         String chunkOwnerUUID = PluginMain.getInstance().getConfig().get("intersurvie.claims.chunk.owner." + chunkCoordsX + chunkCoordsZ).toString();
         boolean isPlayerOwner = chunkOwnerUUID.equalsIgnoreCase(playerUUID);
 
+        String addedPlayerName = args[0];
+        Player addedPlayer = Bukkit.getPlayerExact(addedPlayerName);
+
         if(isPlayerOwner) {
-            String addedPlayerName = args[0];
-            Player addedPlayer = Bukkit.getPlayer(addedPlayerName);
-            assert addedPlayer != null;
-            String addedUUid = addedPlayer.getUniqueId().toString();
-
-            if(addedPlayer.hasPlayedBefore()) {
-                PluginMain.getInstance().getConfig().set("intersurvie.claims.chunk.members." + chunkCoordsX + chunkCoordsZ + "." + addedUUid, "true");
-
-                commandPlayer.sendMessage(PluginMain.getInstance().getConfig().getString("claim-trustAdded").replace("$PLAYER$",addedPlayerName));
+            if(addedPlayer == null) {
+                commandPlayer.sendMessage(PluginMain.getInstance().getConfig().getString("claim-notaplayer").replace("$PLAYER$" , addedPlayerName));
             } else {
-                commandPlayer.sendMessage(PluginMain.getInstance().getConfig().getString("claim-neverJoined").replace("$PLAYER$", addedPlayerName));
+                String addedUUid = addedPlayer.getUniqueId().toString();
+                PluginMain.getInstance().getConfig().set("intersurvie.claims.chunk." + addedUUid + "." + chunkCoordsX + chunkCoordsZ + "." + "added", "true");
+                commandPlayer.sendMessage(PluginMain.getInstance().getConfig().getString("claim-successfullyadded").replace("$PLAYER$", addedPlayerName));
             }
-
         } else {
-            commandPlayer.sendMessage(PluginMain.getInstance().getConfig().getString("claim-notOwner"));
+            commandPlayer.sendMessage(PluginMain.getInstance().getConfig().getString("unclaim-notowner").replace("$PLAYER$", addedPlayerName));
         }
-
-
         return true;
     }
-
-
 }

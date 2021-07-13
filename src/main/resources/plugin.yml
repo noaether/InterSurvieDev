@@ -1,3 +1,4 @@
+
 name: "intersurvie"
 version: 1.1.5
 main: pocoyo.intersurvie.PluginMain
@@ -69,4 +70,3 @@ permissions:
    intersurvie.misc.cooldownBypass:
       description: Allows you to bypass cooldown
       default: op
-

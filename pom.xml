@@ -5,7 +5,7 @@
 
     <groupId>pocoyo</groupId>
     <artifactId>InterSurvie</artifactId>
-    <version>1.1.5</version>
+    <version>1.1.6</version>
 
     <properties>
         <maven.compiler.release>8</maven.compiler.release>

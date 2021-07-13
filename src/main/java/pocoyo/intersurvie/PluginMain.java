@@ -28,7 +28,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import me.alexcrea.proxygate.grades.GradeManager;
 import me.alexcrea.proxygate.grades.Grades;
-import pocoyo.intersurvie.ClaimSystem.*;
+import pocoyo.intersurvie.ClaimSystem.AddChunk;
+import pocoyo.intersurvie.ClaimSystem.ClaimChunk;
+import pocoyo.intersurvie.ClaimSystem.RemoveChunk;
+import pocoyo.intersurvie.ClaimSystem.UnclaimChunk;
 import pocoyo.intersurvie.Other.RandomTeleport;
 
 public class PluginMain extends JavaPlugin {
@@ -66,10 +69,10 @@ public class PluginMain extends JavaPlugin {
 
         this.getCommand("claim").setExecutor(new ClaimChunk(this));
         this.getCommand("unclaim").setExecutor(new UnclaimChunk(this));
+        this.getCommand("add").setExecutor(new AddChunk(this));
+        this.getCommand("remove").setExecutor(new RemoveChunk(this));
         this.getCommand("rtp").setExecutor(new RandomTeleport(this, cooldowns, debugMode));
-        this.getCommand("trust").setExecutor(new AddChunk(this));
-        this.getCommand("untrust").setExecutor(new RemoveChunk(this));
-        this.getCommand("editChunk").setExecutor(new EditChunk(this));
+
 
         // ENABLE EXTERNAL INSTANCES
 

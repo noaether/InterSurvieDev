@@ -1,4 +1,4 @@
-/* package pocoyo.intersurvie;
+package pocoyo.intersurvie;
 
 import com.sun.tools.javac.jvm.Items;
 import org.bukkit.Material;
@@ -69,31 +69,33 @@ public class CustomInventory extends PluginMain implements Listener {
         // if(isChest) { claimInventory.setItem( , chestON); } else { claimInventory.setItem( , chestOFF); }
         // if(isChest) { claimInventory.setItem( , chestON); } else { claimInventory.setItem( , chestOFF); }
 
+        if(isFriendlyMobs) { claimInventory.setItem(2, activated); } else { claimInventory.setItem(2, disabled); }
+        if(isFriendlyMobs) { claimInventory.setItem(11, friendlyON); } else { claimInventory.setItem(11, friendlyOFF); }
+        if(isFriendlyMobs) { claimInventory.setItem(20, activated); } else { claimInventory.setItem(20, disabled); }
+
+        if(isChest) { claimInventory.setItem(6, activated); } else { claimInventory.setItem(6, disabled); }
+        if(isChest) { claimInventory.setItem(15, chestON); } else { claimInventory.setItem(15, chestOFF); }
+        if(isChest) { claimInventory.setItem(24, activated); } else { claimInventory.setItem(24, disabled); }
+
         claimInventory.setItem(0 , empty);
         claimInventory.setItem(1, empty);
-        if(isFriendlyMobs) { claimInventory.setItem(2, activated); } else { claimInventory.setItem(2, disabled); }
         claimInventory.setItem(3, empty);
         claimInventory.setItem(4, empty);
         claimInventory.setItem(5, empty);
-        if(isChest) { claimInventory.setItem(6, activated); } else { claimInventory.setItem(6, disabled); }
         claimInventory.setItem(7, empty);
         claimInventory.setItem(8, empty);
         claimInventory.setItem(9, empty);
         claimInventory.setItem(10,empty);
-        if(isFriendlyMobs) { claimInventory.setItem(11, friendlyON); } else { claimInventory.setItem(11, friendlyOFF); }
         claimInventory.setItem(12, empty);
         claimInventory.setItem(13, redstoneSettings);
         claimInventory.setItem(14, empty);
-        if(isChest) { claimInventory.setItem(15, chestON); } else { claimInventory.setItem(15, chestOFF); }
         claimInventory.setItem(16, empty);
         claimInventory.setItem(17, empty);
         claimInventory.setItem(18, empty);
         claimInventory.setItem(19, empty);
-        if(isFriendlyMobs) { claimInventory.setItem(20, activated); } else { claimInventory.setItem(20, disabled); }
         claimInventory.setItem(21, empty);
         claimInventory.setItem(22, empty);
         claimInventory.setItem(23, empty);
-        if(isChest) { claimInventory.setItem(24, activated); } else { claimInventory.setItem(24, disabled); }
         claimInventory.setItem(25, empty);
         claimInventory.setItem(26, empty);
 
@@ -152,4 +154,3 @@ public class CustomInventory extends PluginMain implements Listener {
     }
 
 }
-*/

@@ -81,7 +81,10 @@ public class EventListener implements Listener {
                 if(chunkOwner.equals(eventPlayer.getUniqueId().toString())) {
                     // Player is chunk owner
                     event.setCancelled(false);
-                } else {
+                } else if (PluginMain.getInstance().getConfig().get("intersurvie.claims.chunk." + String.valueOf(eventPlayer.getUniqueId()) + "." + chunkCoordsX + chunkCoordsZ + "." + "added") == "true") {
+                    // Player is added to chunk
+                    event.setCancelled(false);
+                }{
                     // Player is not chunk owner
                     event.setCancelled(true);
                     eventPlayer.sendMessage(PluginMain.getInstance().getConfig().getString("claim-chunkclaimed"));
@@ -120,7 +123,10 @@ public class EventListener implements Listener {
                 if(chunkOwner.equals(eventPlayer.getUniqueId().toString())) {
                     // Player is chunk owner
                     event.setCancelled(false);
-                } else {
+                } else if (PluginMain.getInstance().getConfig().get("intersurvie.claims.chunk." + String.valueOf(eventPlayer.getUniqueId()) + "." + chunkCoordsX + chunkCoordsZ + "." + "added") == "true") {
+                    // Player is added to chunk
+                    event.setCancelled(false);
+                }{
                     // Player is not chunk owner
                     event.setCancelled(true);
                     eventPlayer.sendMessage(PluginMain.getInstance().getConfig().getString("claim-chunkclaimed"));
@@ -158,6 +164,7 @@ public class EventListener implements Listener {
 
     @EventHandler
     public void InvenClick(InventoryClickEvent event) {
+        event.setCancelled(true);
         Player player = (Player) event.getWhoClicked();
 
         String chunkCoordsX = String.valueOf(player.getLocation().getChunk().getX());
@@ -170,31 +177,27 @@ public class EventListener implements Listener {
             return;
         }
         if (
-            open.getLocation() == null // Checks if inv is plugin-summoned
-                &&
-            open.getSize() == 27
+                        open.getSize() == 26 && // Checks for correct size
+                        open.getLocation() == null // Checks if inv is plugin-summoned
+
         ) {
+
             event.setCancelled(true);
 
             ItemStack empty = new ItemStack(Material.GRAY_STAINED_GLASS_PANE, 1);
             ItemMeta emptyMeta = empty.getItemMeta();
-            emptyMeta.setDisplayName(" ");
+            emptyMeta.setDisplayName("");
             empty.setItemMeta(emptyMeta);
 
             ItemStack activated = new ItemStack(Material.LIME_STAINED_GLASS_PANE, 1 );
             ItemMeta activatedMeta = activated.getItemMeta();
-            activatedMeta.setDisplayName(" ");
+            activatedMeta.setDisplayName(null);
             activated.setItemMeta(activatedMeta);
 
             ItemStack disabled = new ItemStack(Material.RED_STAINED_GLASS_PANE, 1);
             ItemMeta disabledMeta = disabled.getItemMeta();
-            disabledMeta.setDisplayName(" ");
+            disabledMeta.setDisplayName("'");
             disabled.setItemMeta(disabledMeta);
-
-            ItemStack redstoneSettings = new ItemStack(Material.REDSTONE, 1);
-            ItemMeta rONmeta = redstoneSettings.getItemMeta();
-            rONmeta.setDisplayName(ChatColor.RED + "REDSTONE SETTINGS");
-            redstoneSettings.setItemMeta(rONmeta);
 
             ItemStack friendlyON = new ItemStack(Material.IRON_SWORD, 1);
             ItemMeta fONmeta = friendlyON.getItemMeta();
@@ -216,51 +219,39 @@ public class EventListener implements Listener {
             cONmeta.setDisplayName(ChatColor.GREEN + "CAN OPEN CHESTS : ON");
             chestON.setItemMeta(cONmeta);
 
+
+            if (item == null || !item.hasItemMeta() || item == empty) {
+                event.setCancelled(true);
+            }
+
+
+            if (item.getItemMeta().getDisplayName().equals(ChatColor.GREEN + "CAN OPEN CHESTS : ON")) {
+                PluginMain.getInstance().getConfig().set("intersurvie.claims.chunk.perms.chests." + chunkCoordsX + chunkCoordsZ, "false");
+
+                open.setItem(6, disabled);
+                open.setItem(15, chestOFF);
+                open.setItem(24, disabled);
+            } else
+            if (item.getItemMeta().getDisplayName().equals(ChatColor.RED + "CAN OPEN CHESTS : OFF")) {
+                PluginMain.getInstance().getConfig().set("intersurvie.claims.chunk.perms.chests." + chunkCoordsX + chunkCoordsZ, "true");
+
+                open.setItem(6, activated);
+                open.setItem(15, chestON);
+                open.setItem(24, activated);
+            } else
             if (item.getItemMeta().getDisplayName().equals(ChatColor.GREEN + "CAN HIT FRIENDLY ANIMALS : ON")) {
-                ItemStack redstoneOFF = new ItemStack(Material.RED_TERRACOTTA, 1);
-                ItemMeta rOFFmeta = redstoneOFF.getItemMeta();
-                rOFFmeta.setDisplayName(ChatColor.RED + "CAN INTERACT WITH REDSTONE : OFF");
-                redstoneOFF.setItemMeta(rOFFmeta);
+                PluginMain.getInstance().getConfig().set("intersurvie.claims.chunk.perms.friendlymobs." + chunkCoordsX + chunkCoordsZ, "false");
 
-                PluginMain.getInstance().getConfig().set("intersurvie.claims.chunk.perms.redstone." + chunkCoordsX + chunkCoordsZ, "false");
+                open.setItem(6, disabled);
+                open.setItem(11, friendlyOFF);
+                open.setItem(20, disabled);
+            } else
+            if (item.getItemMeta().getDisplayName().equals(ChatColor.RED + "CAN HIT FRIENDLY ANIMALS : OFF")) {
+                PluginMain.getInstance().getConfig().set("intersurvie.claims.chunk.perms.friendlymobs." + chunkCoordsX + chunkCoordsZ, "false");
 
-                open.setItem(3, redstoneOFF);
-            } else if (item.getItemMeta().getDisplayName().equals(ChatColor.GREEN + "CAN HIT FRIENDLY ANIMALS : ON")) {
-                ItemStack redstoneOFF = new ItemStack(Material.RED_TERRACOTTA, 1);
-                ItemMeta rOFFmeta = redstoneOFF.getItemMeta();
-                rOFFmeta.setDisplayName(ChatColor.RED + "CAN INTERACT WITH REDSTONE : OFF");
-                redstoneOFF.setItemMeta(rOFFmeta);
-
-                PluginMain.getInstance().getConfig().set("intersurvie.claims.chunk.perms.redstone." + chunkCoordsX + chunkCoordsZ, "false");
-
-                open.setItem(3, redstoneOFF);
-            } else if (item.getItemMeta().getDisplayName().equals(ChatColor.GREEN + "CAN HIT FRIENDLY ANIMALS : ON")) {
-                ItemStack redstoneOFF = new ItemStack(Material.RED_TERRACOTTA, 1);
-                ItemMeta rOFFmeta = redstoneOFF.getItemMeta();
-                rOFFmeta.setDisplayName(ChatColor.RED + "CAN INTERACT WITH REDSTONE : OFF");
-                redstoneOFF.setItemMeta(rOFFmeta);
-
-                PluginMain.getInstance().getConfig().set("intersurvie.claims.chunk.perms.redstone." + chunkCoordsX + chunkCoordsZ, "false");
-
-                open.setItem(3, redstoneOFF);
-            } else if (item.getItemMeta().getDisplayName().equals(ChatColor.GREEN + "CAN HIT FRIENDLY ANIMALS : ON")) {
-                ItemStack redstoneOFF = new ItemStack(Material.RED_TERRACOTTA, 1);
-                ItemMeta rOFFmeta = redstoneOFF.getItemMeta();
-                rOFFmeta.setDisplayName(ChatColor.RED + "CAN INTERACT WITH REDSTONE : OFF");
-                redstoneOFF.setItemMeta(rOFFmeta);
-
-                PluginMain.getInstance().getConfig().set("intersurvie.claims.chunk.perms.redstone." + chunkCoordsX + chunkCoordsZ, "false");
-
-                open.setItem(3, redstoneOFF);
-            } else if (item.getItemMeta().getDisplayName().equals(ChatColor.GREEN + "CAN HIT FRIENDLY ANIMALS : ON")) {
-                ItemStack redstoneOFF = new ItemStack(Material.RED_TERRACOTTA, 1);
-                ItemMeta rOFFmeta = redstoneOFF.getItemMeta();
-                rOFFmeta.setDisplayName(ChatColor.RED + "CAN INTERACT WITH REDSTONE : OFF");
-                redstoneOFF.setItemMeta(rOFFmeta);
-
-                PluginMain.getInstance().getConfig().set("intersurvie.claims.chunk.perms.redstone." + chunkCoordsX + chunkCoordsZ, "false");
-
-                open.setItem(3, redstoneOFF);
+                open.setItem(6, activated);
+                open.setItem(11, friendlyON);
+                open.setItem(20, activated);
             }
         }
     }

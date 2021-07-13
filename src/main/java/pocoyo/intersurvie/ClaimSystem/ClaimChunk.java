@@ -17,13 +17,10 @@ public class ClaimChunk implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-
         Player commandPlayer = (Player) sender;
+            String chunkCoordsX = String.valueOf(commandPlayer.getLocation().getChunk().getX());
+            String chunkCoordsZ = String.valueOf(commandPlayer.getLocation().getChunk().getZ());
 
-        String chunkCoordsX = String.valueOf(commandPlayer.getLocation().getChunk().getX());
-        String chunkCoordsZ = String.valueOf(commandPlayer.getLocation().getChunk().getZ());
-
-        if(PluginMain.getInstance().getConfig().get("intersurvie.claims.chunk.owner." + chunkCoordsX + chunkCoordsZ) == null || PluginMain.getInstance().getConfig().get("intersurvie.claims.chunk.owner." + chunkCoordsX + chunkCoordsZ) == "false") {
             String playerUUID = String.valueOf(commandPlayer.getUniqueId());
 
             PluginMain.getInstance().getConfig().set("intersurvie.claims.chunk.owner." + chunkCoordsX + chunkCoordsZ, playerUUID);
@@ -42,9 +39,6 @@ public class ClaimChunk implements CommandExecutor {
             commandPlayer.sendMessage(PluginMain.getInstance().getConfig().getString("claim-chunk"));
             getLogger().info((String) PluginMain.getInstance().getConfig().get("intersurvie.claims.chunk.owner." + chunkCoordsX + chunkCoordsZ));
             getLogger().info((String) PluginMain.getInstance().getConfig().get("intersurvie.claims.chunk.isclaimed." + chunkCoordsX + chunkCoordsZ));
-        } else {
-            commandPlayer.sendMessage(PluginMain.getInstance().getConfig().getString("claim-notavailable"));
-        }
         return true;
     }
 }

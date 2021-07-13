@@ -7,24 +7,14 @@ cooldown : "cooldown" # (STRING) | When player is still on cooldown for command 
 
 rtp-teleport : "rtp-teleport" # (STRING) | When player get teleported | $X$ Coords X - $Y$ Coords Y - $Z$ Coords Z
 
-facs-taken : "facs-taken" # (STRING) | When Fac name is already taken | $NAME$ Fac name
-facs-created : "facs-created" # (STRING) | When Fac is created | $NAME$ Fac name
-facs-invited : "facs-invited" # (STRING) | When player gets invited to Fac | $NAME$ Fac name | You have been invited to $NAME$. Type /clans accept to accept
-facs-already : "facs-already" # (STRING) | When player is already in a Fac
-facs-notinvited : "facs-notinvited" # (STRING) | When player is not/hasnt been invited to any faction
-facs-hasjoined : "facs-hasjoined" # (STRING) | When player joins a fac, gets sent to person that invited them | $NAME$ Fac name
-facs-joined : "facs-joined" # (STRING) | When player joins a fac, sent to the person that just joined | $NAME$ Fac name
-facs-notinfac : "facs-notinfac" # (STRING) | When player is not in a fac, but tries to do a fac-related command
-facs-notowner : "facs-notowner" # (STRING) | WHen player tries to do something that only owners can do
-
 unclaim-chunk : "unclaim-chunk" # (STRING) | When player unclaims a chunk
-unclaim-notowner : "unclaim-notowner" # (String) | Player tried to unclaim chunk that isnt theirs
+unclaim-notowner : "unclaim-notowner" # (String) | Player tried to modify chunk that isnt theirs
 unclaim-notclaimed : "unclaim-notclaimed" # (STRING) | Chunk isnt claimed, and cant be unclaimed
+
 claim-chunk : "claim-chunk" # (String) | Player claimed a chunk
 claim-notavailable : "claim-notavailable" # (STRING) | Chunk is already claimed
 
-claim-notowner : "claim-notowner"
-claim-trustAdded : "claim-trustAdded" # (STRING) | Player added a player to the chunk | $PLAYER$ Name of the added player
-claim-untrustRemoved : "claim-untrustRemoved" # (STRING) | Player removed a player from the chunk | $PLAYER$ Name of the added player
-claim-neverJoined : "claim-neverJoined" # (STRING) | Player has never joined and cannot be added | $PLAYER$ Name of the added player
+claim-notaplayer : "claim-notaplayer" # (STRING) | Username given isnt a player/player isnt connected | $PLAYER$ isnt a player
+claim-successfullyadded : "claim-successfullyadded" # (STRING) | $PLAYER$ has successfully been added to chunk
+claim-successfullyremoved : "claim-successfullyremoved" # (STRING) | $PLAYER$ has successfully been removed from chunk
 claim-chunkclaimed : "claim-chunkclaimed" # (STRING) | Chunk is claimed, no interaction permitted

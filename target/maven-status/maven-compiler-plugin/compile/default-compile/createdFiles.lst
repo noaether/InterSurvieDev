@@ -1,4 +1,2 @@
-pocoyo\intersurvie\ClaimSystem\AddChunk.class
-pocoyo\intersurvie\Other\StaffMode.class
-pocoyo\intersurvie\ClaimSystem\RemoveChunk.class
-pocoyo\intersurvie\ClaimSystem\EditChunk.class
+pocoyo/intersurvie/ClaimSystem/RemoveChunk.class
+pocoyo/intersurvie/ClaimSystem/AddChunk.class
